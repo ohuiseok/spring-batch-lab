@@ -69,6 +69,11 @@
 - 민감 정보를 로그에 남기지 않고, ExecutionContext에도 저장하지 않는다
 - `application.properties` 등에 비밀값을 하드코딩하지 않는다
 - 작업 마무리 전 디버그 코드와 불필요한 주석은 제거한다
+- 이 프로젝트는 Spring Batch 학습용 프로젝트이므로, 처음 읽는 사람이 동작 흐름과 개념을 이해할 수 있도록 필요한 곳에 자세한 설명 주석을 작성한다
+- 주석은 기본적으로 한국어로 작성한다
+- 주석에는 "무엇을 하는지"만 반복하지 말고, 왜 이 설정이 필요한지, Spring Batch의 어떤 개념과 연결되는지, 테스트에서 무엇을 검증하는지를 설명한다
+- Job, Step, Tasklet, Chunk, Reader, Processor, Writer, Listener, JobParameters, ExecutionContext, Batch 메타데이터 테이블처럼 학습 핵심 개념이 처음 등장하는 코드에는 교육용 주석을 우선 작성한다
+- 단순 getter/setter, 변수 대입, 메서드명만 봐도 자명한 코드에는 형식적인 주석을 붙이지 않는다
 - 줄 길이는 가능하면 120자 이내로 유지하고 들여쓰기는 4칸 스페이스를 사용한다
 - 중괄호는 K&R 스타일을 사용한다
 - 의존성 주입은 생성자 주입을 우선하고 Lombok `@RequiredArgsConstructor`를 선호한다

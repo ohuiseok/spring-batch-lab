@@ -19,6 +19,14 @@
 - JobParameters가 필요한 Bean은 `@StepScope` 또는 `@JobScope`를 사용한다.
 - Reader/Processor/Writer 내부에 처리 상태를 인스턴스 필드로 누적하지 않는다.
 
+## 주석 작성 규칙
+
+- 이 프로젝트는 교육용 Spring Batch 프로젝트이므로, 코드에는 학습자가 개념과 실행 흐름을 이해할 수 있는 설명 주석을 작성한다.
+- 주석은 기본적으로 한국어로 작성한다.
+- Job, Step, Tasklet, Chunk, Reader, Processor, Writer, Listener, JobParameters, ExecutionContext, Batch 메타데이터 테이블을 다루는 코드는 왜 필요한지와 어떤 Batch 개념인지 설명한다.
+- 테스트 코드에서는 어떤 실행 결과와 Batch 메타데이터를 검증하는지 주석으로 드러낸다.
+- 단순 변수 대입이나 메서드명만으로 충분히 이해되는 코드에는 형식적인 주석을 붙이지 않는다.
+
 ## 멱등성
 
 - 같은 비즈니스 JobParameters로 재실행해도 결과 데이터가 중복되지 않아야 한다.
@@ -40,4 +48,3 @@
 - Processor: `XxxItemProcessor`
 - Writer: `XxxItemWriter`
 - Listener: `XxxJobListener`, `XxxStepListener`, `XxxSkipListener`
-

@@ -218,6 +218,12 @@ public JdbcPagingItemReader<Order> orderReader(
 - 중괄호: K&R 스타일 (같은 줄에 열기)
 - `var` 키워드: 타입이 명확할 때만 사용
 - 불필요한 주석 지양, 코드 자체로 의도 표현
+- 이 저장소는 Spring Batch 교육용 프로젝트이므로, 학습자가 처음 읽어도 흐름을 따라갈 수 있도록 필요한 곳에는 자세한 설명 주석을 작성
+- 주석은 기본적으로 한국어로 작성
+- 주석은 코드가 "무엇을 하는지"를 그대로 반복하기보다, "왜 필요한지", "Spring Batch의 어떤 개념인지", "재시작/멱등성/트랜잭션/청크 경계와 어떤 관련이 있는지"를 설명
+- Job/Step 설정, Tasklet, Chunk 기반 Step, Reader/Processor/Writer, Listener, JobParameters, ExecutionContext, Batch 메타데이터 조회 코드는 교육용 주석 작성 대상
+- 테스트 코드에서는 given/when/then 흐름, 검증하는 Batch 상태값, `BATCH_JOB_INSTANCE`, `BATCH_JOB_EXECUTION`, `BATCH_STEP_EXECUTION` 관계를 주석으로 설명
+- 단순 변수 대입, 명확한 메서드 호출, 자명한 getter/setter에는 형식적인 주석을 붙이지 않음
 - Chunk 크기, 페이지 사이즈 같은 수치는 **매직 넘버 대신 상수**로 정의
 
 ---

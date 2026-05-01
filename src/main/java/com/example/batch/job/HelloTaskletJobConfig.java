@@ -15,8 +15,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 public class HelloTaskletJobConfig {
 
-    public static final String JOB_NAME = "helloTaskletJob";
-    public static final String STEP_NAME = "helloTaskletStep";
+    private static final String JOB_NAME = "helloTaskletJob";
+    static final String STEP_NAME = "helloTaskletStep";
 
     private final JobRepository jobRepository;
     private final PlatformTransactionManager transactionManager;
