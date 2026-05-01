@@ -13,9 +13,9 @@ public class HelloTasklet implements Tasklet {
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
-        // Chapter 1-1 focuses on the Tasklet lifecycle, so this task only writes a simple log.
+        // 1-1장은 Tasklet 실행 흐름을 보는 단계이므로, 실제 비즈니스 처리 대신 간단한 로그만 남긴다.
         log.info("Hello, Batch!");
-        // FINISHED tells Spring Batch that this Tasklet Step does not need to repeat.
+        // FINISHED는 이 Tasklet을 반복 실행하지 않고 Step을 끝내도 된다는 신호다.
         return RepeatStatus.FINISHED;
     }
 }

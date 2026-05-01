@@ -4,9 +4,9 @@ import org.springframework.batch.core.configuration.support.JdbcDefaultBatchConf
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Spring Batch 6 defaults to an in-memory, resourceless JobRepository.
- * This chapter observes BATCH_JOB_INSTANCE, BATCH_JOB_EXECUTION, and
- * BATCH_STEP_EXECUTION directly, so the project uses the JDBC repository.
+ * Spring Batch 6의 기본 설정은 메모리 기반 JobRepository를 사용할 수 있다.
+ * 이 학습 프로젝트는 BATCH_JOB_INSTANCE, BATCH_JOB_EXECUTION,
+ * BATCH_STEP_EXECUTION 같은 메타데이터 테이블을 직접 조회하며 동작을 확인하므로 JDBC 저장소를 사용한다.
  */
 @Configuration
 public class BatchMetadataConfig extends JdbcDefaultBatchConfiguration {

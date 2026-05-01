@@ -24,7 +24,7 @@ public class HelloTaskletJobConfig {
 
     @Bean
     public Job helloTaskletJob() {
-        // A Job is the top-level batch unit. This chapter starts with one Step only.
+        // Job은 배치 실행의 최상위 단위이며, 1-1장에서는 Step 하나만 실행한다.
         return new JobBuilder(JOB_NAME, jobRepository)
                 .start(helloTaskletStep())
                 .build();
@@ -32,7 +32,7 @@ public class HelloTaskletJobConfig {
 
     @Bean
     public Step helloTaskletStep() {
-        // A Tasklet Step runs one task inside a transaction and finishes when the Tasklet returns FINISHED.
+        // Tasklet Step은 하나의 작업을 트랜잭션 안에서 실행하고, FINISHED가 반환되면 Step을 종료한다.
         return new StepBuilder(STEP_NAME, jobRepository)
                 .tasklet(helloTasklet, transactionManager)
                 .build();
