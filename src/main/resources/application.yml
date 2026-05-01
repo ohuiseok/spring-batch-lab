@@ -1,1 +1,8 @@
-spring.application.name=batch
+spring:
+  application:
+    name: batch
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
