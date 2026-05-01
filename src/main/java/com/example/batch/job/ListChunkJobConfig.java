@@ -16,14 +16,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@Slf4j
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class ListChunkJobConfig {
 
     private static final String JOB_NAME = "listChunkJob";
+    private static final int CHUNK_SIZE = 2;
     static final String STEP_NAME = "listChunkStep";
-    static final int CHUNK_SIZE = 2;
 
     private final JobRepository jobRepository;
     private final PlatformTransactionManager transactionManager;
@@ -41,8 +41,7 @@ public class ListChunkJobConfig {
         // chunk(2)는 item 2개를 읽고 처리한 뒤 한 번에 write/commit 한다는 뜻이다.
         // 입력이 5건이면 2건, 2건, 1건으로 총 3번 write/commit 되는 흐름을 관찰할 수 있다.
         return new StepBuilder(STEP_NAME, jobRepository)
-                .<String, String>chunk(CHUNK_SIZE)
-                .transactionManager(transactionManager)
+                .<String, String>chunk(CHUNK_SIZE, transactionManager)
                 .reader(listItemReader())
                 .writer(listItemWriter())
                 .build();
@@ -51,8 +50,9 @@ public class ListChunkJobConfig {
     @Bean
     @StepScope
     public ListItemReader<String> listItemReader() {
-        // ListItemReader는 메모리의 List를 순서대로 하나씩 반환한다.
-        // read()가 null을 반환하면 Spring Batch는 더 이상 읽을 item이 없다고 판단하고 Step을 마무리한다.
+        // ListItemReader는 메모리의 List를 순서대로 하나씩 반환하며 read()가 null이면 Step을 마무리한다.
+        // 내부 인덱스를 가진 stateful 객체이므로, singleton으로 두면 재실행 시 빈 결과만 반환된다.
+        // @StepScope로 Step 실행마다 새 인스턴스를 만들어 read 위치를 초기 상태로 되돌린다.
         return new ListItemReader<>(List.of("alpha", "bravo", "charlie", "delta", "echo"));
     }
 
