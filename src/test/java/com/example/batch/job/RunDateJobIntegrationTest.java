@@ -94,7 +94,13 @@ class RunDateJobIntegrationTest {
         JobExecution execution = jobLauncherTestUtils.launchJob(uniqueJobParametersOnly());
 
         // 필수 JobParameters가 없으면 잘못된 기준일로 처리하지 않고 FAILED로 끝낸다.
+        // ExitStatus 자체가 아닌 exit code만 비교하는 이유는, 실패 시 exitDescription에 스택트레이스가
+        // 들어가 ExitStatus.FAILED 상수와 equals 비교가 어긋나기 때문이다.
         assertThat(execution.getExitStatus().getExitCode()).isEqualTo(ExitStatus.FAILED.getExitCode());
+
+        // Step이 실제로 시작된 뒤 Tasklet 안에서 실패해야 rollbackCount/failureExceptions가 유의미하다.
+        // Step이 시작도 못 한 상황을 NoSuchElementException으로 가리지 않도록 size를 먼저 검증한다.
+        assertThat(execution.getStepExecutions()).hasSize(1);
 
         StepExecution stepExecution = execution.getStepExecutions().iterator().next();
         assertThat(stepExecution.getRollbackCount()).isEqualTo(1);

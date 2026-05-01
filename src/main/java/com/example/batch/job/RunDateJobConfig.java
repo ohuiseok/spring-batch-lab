@@ -12,8 +12,8 @@ import org.springframework.batch.core.step.StepContribution;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.infrastructure.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -21,7 +21,6 @@ import org.springframework.util.StringUtils;
 
 @Configuration
 @RequiredArgsConstructor
-@Slf4j
 public class RunDateJobConfig {
 
     public static final String PARAM_RUN_DATE = "run.date";
@@ -59,13 +58,11 @@ public class RunDateJobConfig {
         return new RunDateTasklet(runDate);
     }
 
+    @RequiredArgsConstructor
+    @Slf4j
     private static class RunDateTasklet implements Tasklet {
 
         private final String runDate;
-
-        private RunDateTasklet(String runDate) {
-            this.runDate = runDate;
-        }
 
         @Override
         public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
