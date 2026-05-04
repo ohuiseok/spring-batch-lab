@@ -41,9 +41,10 @@ public class ListChunkJobConfig {
         // chunk(2)는 item 2개를 읽고 처리한 뒤 한 번에 write/commit 한다는 뜻이다.
         // 입력이 5건이면 2건, 2건, 1건으로 총 3번 write/commit 되는 흐름을 관찰할 수 있다.
         return new StepBuilder(STEP_NAME, jobRepository)
-                .<String, String>chunk(CHUNK_SIZE, transactionManager)
+                .<String, String>chunk(CHUNK_SIZE)
                 .reader(listItemReader())
                 .writer(listItemWriter())
+                .transactionManager(transactionManager)
                 .build();
     }
 
